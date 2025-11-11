@@ -14,8 +14,12 @@ COPY . .
 # Build Medusa
 RUN npm run build
 
+# Copier le script de démarrage
+COPY start-production.sh .
+RUN chmod +x start-production.sh
+
 # Exposer le port
 EXPOSE 9000
 
-# Attendre que la database soit prête, exécuter les migrations et démarrer
-CMD ["sh", "-c", "sleep 15 && npx medusa db:migrate && node .medusa/server/main.js"]
+# Utiliser le script de démarrage
+CMD ["./start-production.sh"]
