@@ -18,4 +18,4 @@ RUN npm run build
 EXPOSE 9000
 
 # Attendre que la database soit prête et démarrer
-CMD ["sh", "-c", "sleep 5 && node .medusa/server/main.js"]
+CMD ["sh", "-c", "sleep 15 && node .medusa/server/main.js"]
