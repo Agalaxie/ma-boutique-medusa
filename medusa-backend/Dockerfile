@@ -14,12 +14,8 @@ COPY . .
 # Build Medusa
 RUN npm run build
 
-# Copier le script de démarrage
-COPY start-production.sh .
-RUN chmod +x start-production.sh
-
 # Exposer le port
 EXPOSE 9000
 
-# Utiliser le script de démarrage
-CMD ["./start-production.sh"]
+# Utiliser le script Node.js pour les migrations et le démarrage
+CMD ["node", "init-and-start.js"]
