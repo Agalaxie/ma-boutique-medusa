@@ -1,125 +1,116 @@
-<p align="center">
-  <a href="https://www.medusajs.com">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/59018053/229103275-b5e482bb-4601-46e6-8142-244f531cebdb.svg">
-    <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/59018053/229103726-e5b529a3-9b3f-4970-8a1f-c6af37f087bf.svg">
-    <img alt="Medusa logo" src="https://user-images.githubusercontent.com/59018053/229103726-e5b529a3-9b3f-4970-8a1f-c6af37f087bf.svg">
-    </picture>
-  </a>
-</p>
+# Ma Boutique E-commerce Medusa
 
-<h1 align="center">
-  Medusa Next.js Starter Template
-</h1>
+Une boutique e-commerce moderne construite avec **Medusa** (backend) et **Next.js 15** (frontend).
 
-<p align="center">
-Combine Medusa's modules for your commerce backend with the newest Next.js 15 features for a performant storefront.</p>
+## 🚀 Fonctionnalités
 
-<p align="center">
-  <a href="https://github.com/medusajs/medusa/blob/master/CONTRIBUTING.md">
-    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat" alt="PRs welcome!" />
-  </a>
-  <a href="https://discord.gg/xpCwq3Kfn8">
-    <img src="https://img.shields.io/badge/chat-on%20discord-7289DA.svg" alt="Discord Chat" />
-  </a>
-  <a href="https://twitter.com/intent/follow?screen_name=medusajs">
-    <img src="https://img.shields.io/twitter/follow/medusajs.svg?label=Follow%20@medusajs" alt="Follow @medusajs" />
-  </a>
-</p>
+- ✅ Catalogue de produits avec recherche
+- ✅ Panier d'achat
+- ✅ Paiement sécurisé avec Stripe
+- ✅ Gestion des comptes clients
+- ✅ Multi-régions et multi-devises
+- ✅ Interface d'administration
+- ✅ Design responsive avec Tailwind CSS
 
-### Prerequisites
+## 📦 Stack Technique
 
-To use the [Next.js Starter Template](https://medusajs.com/nextjs-commerce/), you should have a Medusa server running locally on port 9000.
-For a quick setup, run:
+- **Frontend**: Next.js 15, React, Tailwind CSS, TypeScript
+- **Backend**: Medusa (Node.js)
+- **Base de données**: PostgreSQL
+- **Paiements**: Stripe
+- **Déploiement**: Vercel (frontend) + Railway (backend)
 
-```shell
-npx create-medusa-app@latest
+## 🛠️ Installation Locale
+
+### Prérequis
+- Node.js 18+
+- npm ou yarn
+- PostgreSQL (optionnel pour dev)
+
+### Frontend
+
+```bash
+npm install
+npm run dev
 ```
 
-Check out [create-medusa-app docs](https://docs.medusajs.com/learn/installation) for more details and troubleshooting.
+Le site sera accessible sur http://localhost:8000
 
-# Overview
+### Backend
 
-The Medusa Next.js Starter is built with:
-
-- [Next.js](https://nextjs.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Typescript](https://www.typescriptlang.org/)
-- [Medusa](https://medusajs.com/)
-
-Features include:
-
-- Full ecommerce support:
-  - Product Detail Page
-  - Product Overview Page
-  - Product Collections
-  - Cart
-  - Checkout with Stripe
-  - User Accounts
-  - Order Details
-- Full Next.js 15 support:
-  - App Router
-  - Next fetching/caching
-  - Server Components
-  - Server Actions
-  - Streaming
-  - Static Pre-Rendering
-
-# Quickstart
-
-### Setting up the environment variables
-
-Navigate into your projects directory and get your environment variables ready:
-
-```shell
-cd nextjs-starter-medusa/
-mv .env.template .env.local
+```bash
+cd medusa-backend
+npm install
+npm run dev
 ```
 
-### Install dependencies
+Le backend sera accessible sur http://localhost:9000
 
-Use Yarn to install all dependencies.
+## 🌐 Déploiement en Production
 
-```shell
-yarn
+Consultez le fichier [DEPLOYMENT.md](./DEPLOYMENT.md) pour des instructions détaillées sur comment déployer votre boutique en ligne.
+
+### Résumé rapide:
+
+1. **Pushez sur GitHub**
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial commit"
+   git push
+   ```
+
+2. **Backend sur Railway**
+   - Connectez votre repo GitHub
+   - Ajoutez PostgreSQL
+   - Configurez les variables d'environnement
+
+3. **Frontend sur Vercel**
+   - Importez votre repo GitHub
+   - Configurez les variables d'environnement
+   - Déployez!
+
+## 📝 Configuration
+
+### Variables d'environnement Frontend (.env.local)
+
+```env
+MEDUSA_BACKEND_URL=http://localhost:9000
+NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=pk_test
+NEXT_PUBLIC_BASE_URL=http://localhost:8000
+NEXT_PUBLIC_DEFAULT_REGION=us
+NEXT_PUBLIC_STRIPE_KEY=pk_test_...
+REVALIDATE_SECRET=supersecret
 ```
 
-### Start developing
+### Variables d'environnement Backend (.env)
 
-You are now ready to start up your project.
-
-```shell
-yarn dev
+```env
+DATABASE_URL=postgres://...
+JWT_SECRET=supersecret
+COOKIE_SECRET=supersecret
+STORE_CORS=http://localhost:8000
+ADMIN_CORS=http://localhost:9000
+AUTH_CORS=http://localhost:8000,http://localhost:9000
 ```
 
-### Open the code and start customizing
+## 📚 Documentation
 
-Your site is now running at http://localhost:8000!
+- [Documentation Medusa](https://docs.medusajs.com)
+- [Documentation Next.js](https://nextjs.org/docs)
+- [Guide de déploiement](./DEPLOYMENT.md)
 
-# Payment integrations
+## 🤝 Support
 
-By default this starter supports the following payment integrations
+Pour toute question ou problème:
+- Documentation Medusa: https://docs.medusajs.com
+- Discord Medusa: https://discord.gg/medusajs
+- GitHub Issues: Créez une issue sur ce repository
 
-- [Stripe](https://stripe.com/)
+## 📄 Licence
 
-To enable the integrations you need to add the following to your `.env.local` file:
+MIT
 
-```shell
-NEXT_PUBLIC_STRIPE_KEY=<your-stripe-public-key>
-```
+---
 
-You'll also need to setup the integrations in your Medusa server. See the [Medusa documentation](https://docs.medusajs.com) for more information on how to configure [Stripe](https://docs.medusajs.com/resources/commerce-modules/payment/payment-provider/stripe#main).
-
-# Resources
-
-## Learn more about Medusa
-
-- [Website](https://www.medusajs.com/)
-- [GitHub](https://github.com/medusajs)
-- [Documentation](https://docs.medusajs.com/)
-
-## Learn more about Next.js
-
-- [Website](https://nextjs.org/)
-- [GitHub](https://github.com/vercel/next.js)
-- [Documentation](https://nextjs.org/docs)
+**Créé avec ❤️ en utilisant Medusa & Next.js**

@@ -55,3 +55,14 @@ dump.rdb
 /blob-report/
 /playwright/.cache/
 /playwright/.auth
+
+# Medusa backend
+medusa-backend/.medusa/
+medusa-backend/uploads/
+medusa-backend/medusa-db.sqlite
+medusa-backend/node_modules/
+medusa-backend/dist/
+medusa-backend/build/
+
+# Mock server (dev only)
+medusa-backend/mock-server.js
