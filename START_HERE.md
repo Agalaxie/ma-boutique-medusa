@@ -32,16 +32,25 @@ medusa/
 
 ## 🚀 Prochaines Étapes (Choisissez votre parcours)
 
-### Option A: Déploiement Rapide (15 minutes)
+### Option A: Déploiement avec MCP (Le Plus Facile! 🌟)
+**📖 Lisez: `MCP_SETUP.md`**
+
+Configurez les serveurs MCP et déployez directement depuis Claude:
+1. Exécutez `node setup-mcp.js` pour configurer automatiquement
+2. Demandez à Claude de déployer votre boutique
+3. Claude gère tout: Railway, Vercel, Stripe!
+4. **Temps total: ~10 minutes**
+
+### Option B: Déploiement Rapide Manuel (15 minutes)
 **📖 Lisez: `QUICK_START.md`**
 
-Pour mettre votre boutique en ligne rapidement:
+Pour mettre votre boutique en ligne manuellement:
 1. Créez un compte GitHub
 2. Poussez votre code
 3. Déployez sur Railway (backend) et Vercel (frontend)
 4. Configurez les variables d'environnement
 
-### Option B: Guide Détaillé
+### Option C: Guide Détaillé
 **📖 Lisez: `DEPLOYMENT.md`**
 
 Pour comprendre chaque étape en détail:
