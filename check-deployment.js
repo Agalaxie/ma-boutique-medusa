@@ -1,89 +1,75 @@
 #!/usr/bin/env node
 
 /**
- * Script de vérification avant déploiement
- * Vérifie que tous les fichiers nécessaires sont présents
+ * Script de vérification du déploiement
+ * Vérifie l'état du backend Railway et du frontend
  */
 
-const fs = require('fs');
-const path = require('path');
+const https = require('https');
 
-const checks = {
-  'Configuration Files': [
-    { file: '.gitignore', required: true },
-    { file: 'package.json', required: true },
-    { file: '.env.local', required: false, message: 'Créez ce fichier pour le dev local' },
-    { file: 'vercel.json', required: true },
-    { file: 'README.md', required: true },
-    { file: 'DEPLOYMENT.md', required: true },
-    { file: 'QUICK_START.md', required: true },
-  ],
-  'Backend Files': [
-    { file: 'medusa-backend/package.json', required: true },
-    { file: 'medusa-backend/.env', required: false, message: 'À configurer dans Railway' },
-    { file: 'medusa-backend/railway.json', required: true },
-    { file: 'medusa-backend/Procfile', required: true },
-  ],
-  'Frontend Files': [
-    { file: 'src/middleware.ts', required: true },
-    { file: 'next.config.js', required: true },
-    { file: 'tailwind.config.js', required: true },
-  ],
-};
+const RAILWAY_URL = 'https://ma-boutique-medusa-production.up.railway.app';
 
-let allPassed = true;
+console.log('🔍 Vérification du déploiement Railway...\n');
+console.log('═'.repeat(60));
 
-console.log('🔍 Vérification de la configuration de déploiement...\n');
-
-for (const [category, files] of Object.entries(checks)) {
-  console.log(`\n📁 ${category}:`);
-
-  for (const { file, required, message } of files) {
-    const exists = fs.existsSync(path.join(__dirname, file));
-
-    if (exists) {
-      console.log(`  ✅ ${file}`);
-    } else if (required) {
-      console.log(`  ❌ ${file} - MANQUANT ET REQUIS`);
-      allPassed = false;
-    } else {
-      console.log(`  ⚠️  ${file} - Optionnel ${message ? `(${message})` : ''}`);
-    }
+// Test 1: Health endpoint
+console.log('\n📋 Test 1: Health Check');
+checkEndpoint(`${RAILWAY_URL}/health`, (statusCode, body) => {
+  if (statusCode === 200) {
+    console.log('   ✅ Backend en ligne! Status:', statusCode);
+  } else {
+    console.log('   ❌ Backend non disponible. Status:', statusCode);
+    console.log('   📝 Réponse:', body);
   }
-}
 
-// Vérifier les dépendances
-console.log('\n\n📦 Vérification des dépendances:');
-try {
-  const packageJson = require('./package.json');
-  const requiredDeps = ['next', 'react', 'react-dom'];
-
-  for (const dep of requiredDeps) {
-    if (packageJson.dependencies[dep]) {
-      console.log(`  ✅ ${dep}`);
+  // Test 2: API endpoint
+  console.log('\n📋 Test 2: API Store Regions');
+  checkEndpoint(`${RAILWAY_URL}/store/regions`, (statusCode, body) => {
+    if (statusCode === 200) {
+      console.log('   ✅ API fonctionne! Status:', statusCode);
     } else {
-      console.log(`  ❌ ${dep} - MANQUANT`);
-      allPassed = false;
+      console.log('   ⚠️  API non disponible. Status:', statusCode || 'Connection failed');
     }
-  }
-} catch (error) {
-  console.log('  ❌ Impossible de lire package.json');
-  allPassed = false;
-}
 
-// Résumé
-console.log('\n\n' + '='.repeat(50));
-if (allPassed) {
-  console.log('✅ Tous les fichiers requis sont présents!');
-  console.log('\n📝 Prochaines étapes:');
-  console.log('  1. Lisez QUICK_START.md pour le déploiement rapide');
-  console.log('  2. Lisez DEPLOYMENT.md pour les détails complets');
-  console.log('  3. Committez et poussez sur GitHub');
-  console.log('  4. Déployez sur Vercel et Railway');
-  console.log('\n🚀 Bonne chance avec votre boutique!');
-} else {
-  console.log('❌ Certains fichiers requis sont manquants.');
-  console.log('   Veuillez les créer avant de déployer.');
-  process.exit(1);
+    console.log('\n' + '═'.repeat(60));
+    console.log('\n📊 Résumé du déploiement:\n');
+    console.log('🌐 URL Railway: ' + RAILWAY_URL);
+    console.log('\n💡 Actions recommandées:\n');
+    console.log('1. Vérifiez les logs Railway:');
+    console.log('   https://railway.app/dashboard');
+    console.log('\n2. Si le déploiement échoue encore, essayez:');
+    console.log('   - Vérifier que DATABASE_URL est bien configuré');
+    console.log('   - Vérifier que toutes les variables d\'environnement sont présentes');
+    console.log('   - Regarder les logs de build et de déploiement dans Railway');
+    console.log('\n3. Une fois le backend en ligne, vous pourrez:');
+    console.log('   - Déployer le frontend sur Vercel');
+    console.log('   - Mettre à jour les CORS avec l\'URL Vercel');
+    console.log('   - Créer votre premier compte admin');
+    console.log('\n' + '═'.repeat(60));
+  });
+});
+
+function checkEndpoint(url, callback) {
+  const request = https.get(url, { timeout: 5000 }, (res) => {
+    let data = '';
+
+    res.on('data', (chunk) => {
+      data += chunk;
+    });
+
+    res.on('end', () => {
+      callback(res.statusCode, data);
+    });
+  });
+
+  request.on('error', (error) => {
+    console.log('   ❌ Erreur de connexion:', error.message);
+    callback(null, error.message);
+  });
+
+  request.on('timeout', () => {
+    console.log('   ⏱️  Timeout - Le serveur ne répond pas');
+    request.destroy();
+    callback(null, 'Timeout');
+  });
 }
-console.log('='.repeat(50));

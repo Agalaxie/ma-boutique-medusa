@@ -25,7 +25,11 @@
       "Bash(git commit:*)",
       "WebSearch",
       "WebFetch(domain:github.com)",
-      "Bash(node deploy.js:*)"
+      "Bash(node deploy.js:*)",
+      "Bash(git remote set-url:*)",
+      "Bash(git push:*)",
+      "Bash(git rm:*)",
+      "Bash(timeout:*)"
     ],
     "deny": [],
     "ask": []
