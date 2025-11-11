@@ -17,5 +17,5 @@ RUN npm run build
 # Exposer le port
 EXPOSE 9000
 
-# Attendre que la database soit prête et démarrer
-CMD ["sh", "-c", "sleep 15 && node .medusa/server/main.js"]
+# Attendre que la database soit prête, exécuter les migrations et démarrer
+CMD ["sh", "-c", "sleep 15 && npx medusa db:migrate && node .medusa/server/main.js"]
