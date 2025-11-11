@@ -21,28 +21,25 @@ async function runMigrations() {
   console.log('📦 Running database migrations...');
 
   try {
-    // Utiliser directement le framework Medusa pour les migrations
-    const { runMigrations } = require('@medusajs/framework/database');
-
-    await runMigrations();
+    // Pour Medusa v2, utiliser la commande migrations
+    console.log('🔄 Running Medusa migrations...');
+    execSync('npx medusa migrations run', { stdio: 'inherit' });
     console.log('✅ Migrations completed successfully!');
     return true;
   } catch (error) {
     console.error('❌ Migration error:', error.message);
 
-    // Alternative: essayer avec la CLI
+    // Essayer de créer les tables manuellement
     try {
-      console.log('🔄 Trying alternative migration method...');
-      execSync('npx medusa db:migrate', { stdio: 'inherit' });
-      console.log('✅ Migrations completed (alternative method)!');
-      return true;
-    } catch (cliError) {
-      console.error('❌ CLI migration also failed:', cliError.message);
-
-      // Continuer quand même - peut-être que les tables existent déjà
-      console.log('⚠️  Continuing anyway - tables might already exist...');
-      return false;
+      console.log('🔄 Trying to sync database schema...');
+      // Démarrer temporairement le serveur pour créer les tables
+      execSync('timeout 10 npx medusa start', { stdio: 'inherit' });
+    } catch (syncError) {
+      // Ignorer l'erreur de timeout, c'est normal
     }
+
+    console.log('⚠️  Continuing - tables might have been created...');
+    return false;
   }
 }
 
@@ -56,7 +53,19 @@ async function main() {
 
   // Démarrer le serveur
   console.log('🎯 Starting Medusa server...');
-  require('./.medusa/server/main.js');
+
+  // Essayer différents chemins possibles
+  try {
+    require('./.medusa/server/main.js');
+  } catch (e1) {
+    try {
+      console.log('📂 Trying alternative path...');
+      require('./dist/main.js');
+    } catch (e2) {
+      console.log('📂 Using npm script to start...');
+      execSync('npx medusa start', { stdio: 'inherit' });
+    }
+  }
 }
 
 // Exécuter le script
