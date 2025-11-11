@@ -3,7 +3,7 @@ builder = "NIXPACKS"
 buildCommand = "cd medusa-backend && npm install"
 
 [deploy]
-startCommand = "cd medusa-backend && node --loader tsx ./node_modules/.bin/medusa start"
+startCommand = "cd medusa-backend && npx tsx ./node_modules/@medusajs/medusa-cli/bin/medusa.js start --port $PORT --host 0.0.0.0"
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 10
 
