@@ -17,5 +17,5 @@ RUN npm run build
 # Exposer le port
 EXPOSE 9000
 
-# Démarrer directement avec Node
-CMD ["node", ".medusa/server/main.js"]
+# Attendre que la database soit prête et démarrer
+CMD ["sh", "-c", "sleep 5 && node .medusa/server/main.js"]
