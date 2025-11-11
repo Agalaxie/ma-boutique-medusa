@@ -22,7 +22,9 @@
       "Bash(taskkill //F //PID 28844)",
       "Bash(node check-deployment.js:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "WebSearch",
+      "WebFetch(domain:github.com)"
     ],
     "deny": [],
     "ask": []

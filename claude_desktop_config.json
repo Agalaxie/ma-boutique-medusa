@@ -1,0 +1,32 @@
+{
+  "mcpServers": {
+    "vercel": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-vercel"
+      ],
+      "env": {
+        "VERCEL_API_TOKEN": "REMPLACEZ_PAR_VOTRE_TOKEN_VERCEL"
+      }
+    },
+    "railway": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@jasontanswe/railway-mcp",
+        "REMPLACEZ_PAR_VOTRE_TOKEN_RAILWAY"
+      ]
+    },
+    "stripe": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@stripe/mcp"
+      ],
+      "env": {
+        "STRIPE_API_KEY": "REMPLACEZ_PAR_VOTRE_CLE_STRIPE_TEST"
+      }
+    }
+  }
+}
