@@ -175,9 +175,9 @@ app.get('/store/collections', (req, res) => {
 });
 
 // Start server
-const PORT = 9000;
-app.listen(PORT, () => {
-  console.log(`Mock Medusa backend running on http://localhost:${PORT}`);
+const PORT = process.env.PORT || 9000;
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Mock Medusa backend running on http://0.0.0.0:${PORT}`);
   console.log('Available endpoints:');
   console.log('  - GET /health');
   console.log('  - GET /store/regions');
