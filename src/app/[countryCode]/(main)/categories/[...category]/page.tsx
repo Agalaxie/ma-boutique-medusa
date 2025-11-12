@@ -7,6 +7,10 @@ import { StoreRegion } from "@medusajs/types"
 import CategoryTemplate from "@modules/categories/templates"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 
+// Force dynamic rendering to avoid build-time API calls
+export const dynamic = 'force-dynamic'
+export const dynamicParams = true
+
 type Props = {
   params: Promise<{ category: string[]; countryCode: string }>
   searchParams: Promise<{

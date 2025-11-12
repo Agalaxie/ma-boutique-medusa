@@ -8,8 +8,10 @@ const nextConfig = withStoreConfig({
   eslint: {
     ignoreDuringBuilds: true,
   },
-  // Désactiver la génération statique pour éviter les erreurs d'API
-  output: 'standalone',
+  // Configuration expérimentale pour éviter les erreurs d'API au build
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
+  },
 })
 
 export default nextConfig
