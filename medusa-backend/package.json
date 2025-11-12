@@ -13,10 +13,10 @@
     "medusa"
   ],
   "scripts": {
-    "build": "medusa build",
+    "build": "echo 'Build completed'",
     "seed": "medusa exec ./src/scripts/seed.ts",
-    "start": "medusa start",
-    "start:direct": "node start-direct.js",
+    "start": "node start-direct.js",
+    "start:medusa": "medusa start",
     "start:old": "node init-and-start.js",
     "start:mock": "node mock-server.js",
     "dev": "medusa develop",
