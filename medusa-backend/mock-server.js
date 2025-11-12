@@ -174,9 +174,9 @@ app.get('/store/collections', (req, res) => {
   });
 });
 
-// Mock categories endpoint
-app.get('/store/categories/*', (req, res) => {
-  const handle = req.params[0] || 'sample-category';
+// Mock categories endpoint - Express v5 compatible
+app.get('/store/categories/:handle', (req, res) => {
+  const handle = req.params.handle || 'sample-category';
   res.json({
     product_category: {
       id: 'cat_01',
