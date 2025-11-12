@@ -43,7 +43,8 @@
       "Bash(railway variables:*)",
       "Bash(railway service create:*)",
       "Bash(railway up:*)",
-      "Bash(railway link:*)"
+      "Bash(railway link:*)",
+      "Bash(railway.json)"
     ],
     "deny": [],
     "ask": []
