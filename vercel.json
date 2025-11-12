@@ -4,12 +4,5 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install",
   "framework": "nextjs",
-  "regions": ["iad1"],
-  "env": {
-    "MEDUSA_BACKEND_URL": "@medusa_backend_url",
-    "NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY": "@next_public_medusa_publishable_key",
-    "NEXT_PUBLIC_BASE_URL": "@next_public_base_url",
-    "NEXT_PUBLIC_DEFAULT_REGION": "@next_public_default_region",
-    "REVALIDATE_SECRET": "@revalidate_secret"
-  }
+  "regions": ["iad1"]
 }
