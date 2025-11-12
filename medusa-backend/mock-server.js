@@ -174,6 +174,20 @@ app.get('/store/collections', (req, res) => {
   });
 });
 
+// Mock categories endpoint
+app.get('/store/categories/:handle(*)', (req, res) => {
+  res.json({
+    product_category: {
+      id: 'cat_01',
+      name: 'Sample Category',
+      handle: req.params.handle || 'sample-category',
+      description: 'A sample category',
+      parent_category_id: null,
+      products: []
+    }
+  });
+});
+
 // Start server
 const PORT = process.env.PORT || 9000;
 app.listen(PORT, '0.0.0.0', () => {
