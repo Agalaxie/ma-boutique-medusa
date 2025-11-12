@@ -13,12 +13,12 @@
     "medusa"
   ],
   "scripts": {
-    "build": "echo 'Build completed'",
+    "build": "medusa build",
     "seed": "medusa exec ./src/scripts/seed.ts",
-    "start": "node mock-server.js",
+    "start": "medusa start",
     "start:direct": "node start-direct.js",
     "start:old": "node init-and-start.js",
-    "start:prod": "medusa start",
+    "start:mock": "node mock-server.js",
     "dev": "medusa develop",
     "test:integration:http": "TEST_TYPE=integration:http NODE_OPTIONS=--experimental-vm-modules jest --silent=false --runInBand --forceExit",
     "test:integration:modules": "TEST_TYPE=integration:modules NODE_OPTIONS=--experimental-vm-modules jest --silent=false --runInBand --forceExit",
