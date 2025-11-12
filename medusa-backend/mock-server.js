@@ -175,12 +175,13 @@ app.get('/store/collections', (req, res) => {
 });
 
 // Mock categories endpoint
-app.get('/store/categories/:handle(*)', (req, res) => {
+app.get('/store/categories/*', (req, res) => {
+  const handle = req.params[0] || 'sample-category';
   res.json({
     product_category: {
       id: 'cat_01',
       name: 'Sample Category',
-      handle: req.params.handle || 'sample-category',
+      handle: handle,
       description: 'A sample category',
       parent_category_id: null,
       products: []
